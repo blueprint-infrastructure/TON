@@ -96,7 +96,7 @@ if [ $? -ne 0 ] || [ -z "$VALIDATORS_DATA" ]; then
     exit 1
 fi
 
-# Extract key metrics from live
+# Extract key metrics from live validator data
 TOTAL_STAKE=$(echo "$VALIDATORS_DATA" | jq -r '.total_stake')
 VALIDATOR_COUNT=$(echo "$VALIDATORS_DATA" | jq -r '.validators | length')
 MIN_STAKE=$(echo "$VALIDATORS_DATA" | jq -r '.min_stake')
