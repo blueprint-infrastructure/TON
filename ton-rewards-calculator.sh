@@ -28,7 +28,7 @@ MAX_FACTOR_MULTIPLIER=3
 
 # Source: https://docs.ton.org/v3/documentation/infra/nodes/validation/staking-incentives
 # Quote: "minimum 300k TON" and "you need to have minimum 300k TON"
-MIN_STAKE_REQUIREMENT=300000000000000  # 300,000 TON in nanoTON
+MIN_STAKE_REQUIREMENT=300000000000000  # 300,000 TON in nanoTON (300k * 10^9)
 
 # Source: https://docs.ton.org/v3/documentation/infra/nodes/validation/staking-incentives
 # Quote: "validation cycle lasting 65536 seconds, or approximately 18 hours"
@@ -42,6 +42,10 @@ DOCUMENTED_BLOCK_TIME=5.0
 # Quote: "masterchain_block_fee: 1700000000" and "basechain_block_fee: 1000000000"
 OFFICIAL_MASTERCHAIN_BLOCK_FEE=1700000000  # 1.7 TON in nanoTON (documented)
 OFFICIAL_BASECHAIN_BLOCK_FEE=1000000000    # 1.0 TON in nanoTON (documented)
+
+# Note: Deflationary burn mechanism affects reward distribution
+# Source: https://docs.ton.org/v3/documentation/infra/nodes/validation/staking-incentives
+BURN_MECHANISM_ENABLED=1
 
 # Source: https://api.coingecko.com/api/v3/simple/price?ids=the-open-network&vs_currencies=usd
 # Live API endpoint for current TON price
@@ -232,8 +236,8 @@ TOTAL_NETWORK_STAKE_TON=$(echo "scale=0; $TOTAL_STAKE / 1000000000" | bc)
 DAILY_REWARD_RATE=$(echo "scale=8; $TOTAL_DAILY_BLOCK_REWARDS / $TOTAL_NETWORK_STAKE_TON" | bc)
 ANNUAL_REWARD_RATE=$(echo "scale=6; $DAILY_REWARD_RATE * 365 * 100" | bc)
 
-echo "   Live reward rate: $(echo "scale=4; $DAILY_REWARD_RATE * 100" | bc)%/day"
-echo "   Live annual rate: $ANNUAL_REWARD_RATE%"
+echo "   Daily reward rate: $(echo "scale=4; $DAILY_REWARD_RATE * 100" | bc)%/day"
+echo "   Annual reward rate: $ANNUAL_REWARD_RATE%"
 echo "   Source: Documented block fees + documented block time"
 
 # Calculate for planned setup

@@ -85,7 +85,7 @@ CONFIG: Validator activation period: 20 days
 
 0. Getting current TON price from CoinGecko...
    API: https://api.coingecko.com/api/v3/simple/price?ids=the-open-network&vs_currencies=usd
-   Current TON Price: $3.24 (live from CoinGecko)
+   Current TON Price: $3.23 (live from CoinGecko)
 
 1. Getting current validator data...
    API: https://tonapi.io/v2/blockchain/validators
@@ -119,7 +119,7 @@ Current network average: 988675 TON per validator (live)
 
 3. Getting masterchain information...
    API: https://toncenter.com/api/v2/getMasterchainInfo
-   Current Masterchain Seqno: 48758700 (live)
+   Current Masterchain Seqno: 48759276 (live)
 
 4. Calculating LIVE on-chain staking rewards...
    Using documented block rewards from TON network constants...
@@ -131,8 +131,8 @@ Current network average: 988675 TON per validator (live)
    ✓ Documented block production: 5.0 seconds per block
    ✓ Calculated daily blocks: 17280
    Calculated daily network rewards: 46656 TON
-   Live reward rate: .01179700%/day
-   Live annual rate: 4.30590500%
+   Daily reward rate: .01179700%/day
+   Annual reward rate: 4.30590500%
    Source: Documented block fees + documented block time
 
 === SETUP CALCULATIONS ===
@@ -142,11 +142,11 @@ ACTUAL Configuration:
    • Total: 27 validators
 
 Monthly Rewards: 176955.00000000 TON (after activation)
-Monthly Revenue: $573334.20000000 (@$3.24/TON)
+Monthly Revenue: $571564.65000000 (@$3.23/TON)
 Monthly Costs: $27000
 Activation Period Costs: $18000.00 (20 days @ $900.00/day)
-Net Profit (ongoing): $546334.20000000/month
-ROI (ongoing): 2023.4%/month
+Net Profit (ongoing): $544564.65000000/month
+ROI (ongoing): 2016.9%/month
 
 ════════════════════════════════════════════════════════════════════════════════
                               FINAL RESULTS SUMMARY
@@ -157,7 +157,7 @@ ROI (ongoing): 2023.4%/month
    • Active Validators: 400
    • 400th Validator Stake: 630140 TON
    • Network Average Stake: 988675 TON per validator
-   • Current TON Price: $3.24
+   • Current TON Price: $3.23
 
 [CURRENT OPTIMAL CONFIGURATION]
    • Target Stake: 50M TON
@@ -170,26 +170,26 @@ ROI (ongoing): 2023.4%/month
 
 [FINANCIAL ANALYSIS - TOTAL OPERATION]
    • Monthly Rewards: 176955.00000000 TON
-   • Monthly Revenue: $573334.20000000
+   • Monthly Revenue: $571564.65000000
    • Monthly Operating Costs: $27000
    • Activation Period Costs: $18000.00 (20 days @ $900.00/day)
-   • Net Monthly Profit: $546334.20000000
-   • Monthly ROI: 2023.4%/month
-   • Annual Profit: $6556010.40000000
-   • Annual ROI: 24280.8%
+   • Net Monthly Profit: $544564.65000000
+   • Monthly ROI: 2016.9%/month
+   • Annual Profit: $6534775.80000000
+   • Annual ROI: 24202.8%
 
 [FINANCIAL ANALYSIS - PER SINGLE VALIDATOR]
    • Monthly Rewards per Validator: 6553.888 TON
-   • Monthly Revenue per Validator: $21234.60
+   • Monthly Revenue per Validator: $21169.06
    • Monthly Cost per Validator: $1000
    • Activation Cost per Validator: $666.66 (20 days)
-   • Net Monthly Profit per Validator: $20234.60
-   • Monthly ROI per Validator: 2023.4%/month
-   • Annual Profit per Validator: $242815.20
-   • Annual ROI per Validator: 24280.8%
+   • Net Monthly Profit per Validator: $20169.06
+   • Monthly ROI per Validator: 2016.9%/month
+   • Annual Profit per Validator: $242028.72
+   • Annual ROI per Validator: 24202.8%
 
 [PROFITABILITY ASSESSMENT]
-   • Break-even Stake: 2322392 TON
+   • Break-even Stake: 2329582 TON
    • Break-even Validators: 2 validators minimum
    • Profit Margin: 95.2% (Net/Revenue)
    • Activation Period: 20 days setup (costs $18000.00)
@@ -203,8 +203,8 @@ ROI (ongoing): 2023.4%/month
    • Total deployment: 27 validators using 50.000M TON
    • Setup timeline: 20 days to activate (budget $18000.00)
    • Monthly hardware budget: $27000 ($1000 per validator)
-   • Expected monthly profit: $546334.20000000 total ($20234.60 per validator)
-   • Each validator earns 4.30590500% APY with 2023.4%/month ROI
+   • Expected monthly profit: $544564.65000000 total ($20169.06 per validator)
+   • Each validator earns 4.30590500% APY with 2016.9%/month ROI
    • Total stake earning 4.30590500% APY on 50.000M TON
    • Validators will be 191.2% of network average size
    • Individual validator payback: .9 days to recover activation costs
