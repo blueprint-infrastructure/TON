@@ -301,7 +301,7 @@ echo "   • Stake Utilization: ${UTILIZATION}%"
 echo "   • Validator Size vs Network Average: $(echo "scale=1; $OPTIMAL_STAKE_PER_VALIDATOR_TON * 100 / $AVG_VALIDATOR_STAKE" | bc)% of network average size"
 
 echo ""
-echo "[FINANCIAL ANALYSIS]"
+echo "[FINANCIAL ANALYSIS - TOTAL OPERATION]"
 echo "   • Monthly Rewards: ${TOTAL_MONTHLY_REWARDS} TON"
 echo "   • Monthly Revenue: \$${TOTAL_MONTHLY_REVENUE}"
 echo "   • Monthly Operating Costs: \$${TOTAL_MONTHLY_COSTS}"
@@ -310,6 +310,25 @@ echo "   • Net Monthly Profit: \$${NET_MONTHLY_PROFIT}"
 echo "   • Monthly ROI: ${MONTHLY_ROI}%/month"
 echo "   • Annual Profit: \$$(echo "scale=0; $NET_MONTHLY_PROFIT * 12" | bc)"
 echo "   • Annual ROI: $(echo "scale=0; $MONTHLY_ROI * 12" | bc)%"
+
+echo ""
+echo "[FINANCIAL ANALYSIS - PER SINGLE VALIDATOR]"
+# Calculate per-validator metrics
+REWARDS_PER_VALIDATOR=$(echo "scale=3; $TOTAL_MONTHLY_REWARDS / $VALIDATORS_NEEDED" | bc)
+REVENUE_PER_VALIDATOR=$(echo "scale=2; $TOTAL_MONTHLY_REVENUE / $VALIDATORS_NEEDED" | bc)
+COST_PER_VALIDATOR=$MONTHLY_COST_PER_VALIDATOR
+PROFIT_PER_VALIDATOR=$(echo "scale=2; $REVENUE_PER_VALIDATOR - $COST_PER_VALIDATOR" | bc)
+ROI_PER_VALIDATOR=$(echo "scale=1; $PROFIT_PER_VALIDATOR * 100 / $COST_PER_VALIDATOR" | bc)
+ACTIVATION_COST_PER_VALIDATOR=$(echo "scale=2; $ACTIVATION_COSTS / $VALIDATORS_NEEDED" | bc)
+
+echo "   • Monthly Rewards per Validator: ${REWARDS_PER_VALIDATOR} TON"
+echo "   • Monthly Revenue per Validator: \$${REVENUE_PER_VALIDATOR}"
+echo "   • Monthly Cost per Validator: \$${COST_PER_VALIDATOR}"
+echo "   • Activation Cost per Validator: \$${ACTIVATION_COST_PER_VALIDATOR} (${VALIDATOR_ACTIVATION_DAYS} days)"
+echo "   • Net Monthly Profit per Validator: \$${PROFIT_PER_VALIDATOR}"
+echo "   • Monthly ROI per Validator: ${ROI_PER_VALIDATOR}%/month"
+echo "   • Annual Profit per Validator: \$$(echo "scale=0; $PROFIT_PER_VALIDATOR * 12" | bc)"
+echo "   • Annual ROI per Validator: $(echo "scale=0; $ROI_PER_VALIDATOR * 12" | bc)%"
 
 echo ""
 echo "[PROFITABILITY ASSESSMENT]"
@@ -352,9 +371,11 @@ else
 fi
 echo "   • Setup timeline: ${VALIDATOR_ACTIVATION_DAYS} days to activate (budget \$${ACTIVATION_COSTS})"
 echo "   • Monthly hardware budget: \$${TOTAL_MONTHLY_COSTS} (\$${MONTHLY_COST_PER_VALIDATOR} per validator)"
-echo "   • Expected monthly profit: \$${NET_MONTHLY_PROFIT} (after activation)"
+echo "   • Expected monthly profit: \$${NET_MONTHLY_PROFIT} total (\$${PROFIT_PER_VALIDATOR} per validator)"
+echo "   • Each validator earns ${ANNUAL_REWARD_RATE}% APY with ${ROI_PER_VALIDATOR}%/month ROI"
 echo "   • Total stake earning ${ANNUAL_REWARD_RATE}% APY on ${ACTUAL_TOTAL_DEPLOYED_MILLIONS}M TON"
 echo "   • Validators will be $(echo "scale=1; $OPTIMAL_STAKE_PER_VALIDATOR_TON * 100 / $AVG_VALIDATOR_STAKE" | bc)% of network average size"
+echo "   • Individual validator payback: $(echo "scale=1; $ACTIVATION_COST_PER_VALIDATOR * 30 / $PROFIT_PER_VALIDATOR" | bc) days to recover activation costs"
 
 echo ""
 echo "════════════════════════════════════════════════════════════════════════════════" 

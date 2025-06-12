@@ -77,50 +77,139 @@ chmod +x ton-rewards-calculator.sh
 ### Example Output
 
 ```
+=== TON Validator Rewards Calculator (Live Chain Data) ===
+Fetching current network data...
+CONFIG: Planning to stake 50M TON
+CONFIG: Monthly cost per validator: $1000
+CONFIG: Validator activation period: 20 days
+
+0. Getting current TON price from CoinGecko...
+   API: https://api.coingecko.com/api/v3/simple/price?ids=the-open-network&vs_currencies=usd
+   Current TON Price: $3.24 (live from CoinGecko)
+
+1. Getting current validator data...
+   API: https://tonapi.io/v2/blockchain/validators
+   Total Network Stake: 395470026 TON (live)
+   Active Validators: 400 (live)
+   Min Stake: 300000 TON (live)
+
+2. Finding lowest elected validator (400th position)...
+   Source: Live TON network data from https://tonapi.io/v2/blockchain/validators
+   Lowest Elected Validator Stake: 630140 TON (live)
+   This is the 400th validator (minimum effective balance)
+   Applying max_factor rule from TON docs...
+   Source: https://docs.ton.org/v3/documentation/infra/nodes/validation/staking-incentives
+   Rule: 'The current max_factor in config is 3'
+   Max Effective Balance: 1890420 TON (3x min effective)
+   Max Effective Balance (nanoTON): 1890420261314169
+   ACTUAL DEPLOYMENT:
+   → 26 validators @ 1890420 TON each = 49150920 TON
+   → 1 validator @ 849080 TON
+   → TOTAL: 27 validators deploying 50000000 TON (100%)
+
+=== DYNAMIC VALIDATOR PROVISIONING (100% live) ===
+Min Effective Balance (400th validator): 630140 TON (live)
+Max Effective Balance (3x factor): 1890420 TON (calculated)
+Target Total Stake: 50.0M TON (config)
+Optimal Stake Per Validator: 1890420 TON (using exact max effective)
+Validators Needed: 27 (calculated for 100% deployment)
+Actual Total Deployed: 50.000M TON (calculated)
+Stake Utilization: 100.0% (maximized deployment)
+Current network average: 988675 TON per validator (live)
+
+3. Getting masterchain information...
+   API: https://toncenter.com/api/v2/getMasterchainInfo
+   Current Masterchain Seqno: 48758700 (live)
+
+4. Calculating LIVE on-chain staking rewards...
+   Using documented block rewards from TON network constants...
+   Source: https://docs.ton.org/v3/documentation/smart-contracts/limits
+   ✓ Masterchain block reward: 1.7 TON (documented official)
+   ✓ Basechain block reward: 1.0 TON (documented official)
+   Using documented block production rate from TON network...
+   Source: https://docs.ton.org/v3/documentation/smart-contracts/limits
+   ✓ Documented block production: 5.0 seconds per block
+   ✓ Calculated daily blocks: 17280
+   Calculated daily network rewards: 46656 TON
+   Live reward rate: .01179700%/day
+   Live annual rate: 4.30590500%
+   Source: Documented block fees + documented block time
+
+=== SETUP CALCULATIONS ===
+ACTUAL Configuration:
+   • 26 validators with 1890420 TON each
+   • 1 validator with 849080 TON
+   • Total: 27 validators
+
+Monthly Rewards: 176955.00000000 TON (after activation)
+Monthly Revenue: $573334.20000000 (@$3.24/TON)
+Monthly Costs: $27000
+Activation Period Costs: $18000.00 (20 days @ $900.00/day)
+Net Profit (ongoing): $546334.20000000/month
+ROI (ongoing): 2023.4%/month
+
+════════════════════════════════════════════════════════════════════════════════
+                              FINAL RESULTS SUMMARY
+════════════════════════════════════════════════════════════════════════════════
+
 [LIVE NETWORK DATA]
-   • Total Network Stake: 409992993 TON
+   • Total Network Stake: 395470026 TON
    • Active Validators: 400
-   • 400th Validator Stake: 694559 TON
-   • Network Average Stake: 1024982 TON per validator
-   • Current TON Price: $3.29
+   • 400th Validator Stake: 630140 TON
+   • Network Average Stake: 988675 TON per validator
+   • Current TON Price: $3.24
 
 [CURRENT OPTIMAL CONFIGURATION]
    • Target Stake: 50M TON
-   • Max Effective Balance: 2083677 TON per validator
-   • Validators Required: 24
-   • Stake Per Validator: 2083677 TON
+   • Max Effective Balance: 1890420 TON per validator
+   • Validators Required: 27
+   • Stake Per Validator: 1890420 TON
    • Actual Stake Deployed: 50.000M TON
    • Stake Utilization: 100.0%
-   • Validator Size vs Network Average: 203.2% of network average size
+   • Validator Size vs Network Average: 191.2% of network average size
 
-[FINANCIAL ANALYSIS]
-   • Monthly Rewards: 170685.00000000 TON
-   • Monthly Revenue: $561553.65000000
-   • Monthly Operating Costs: $24000
-   • Activation Period Costs: $16000.00 (20 days @ $800.00/day)
-   • Net Monthly Profit: $537553.65000000
-   • Monthly ROI: 2239.8%/month
-   • Annual Profit: $6450643.80000000
-   • Annual ROI: 26877.6%
+[FINANCIAL ANALYSIS - TOTAL OPERATION]
+   • Monthly Rewards: 176955.00000000 TON
+   • Monthly Revenue: $573334.20000000
+   • Monthly Operating Costs: $27000
+   • Activation Period Costs: $18000.00 (20 days @ $900.00/day)
+   • Net Monthly Profit: $546334.20000000
+   • Monthly ROI: 2023.4%/month
+   • Annual Profit: $6556010.40000000
+   • Annual ROI: 24280.8%
+
+[FINANCIAL ANALYSIS - PER SINGLE VALIDATOR]
+   • Monthly Rewards per Validator: 6553.888 TON
+   • Monthly Revenue per Validator: $21234.60
+   • Monthly Cost per Validator: $1000
+   • Activation Cost per Validator: $666.66 (20 days)
+   • Net Monthly Profit per Validator: $20234.60
+   • Monthly ROI per Validator: 2023.4%/month
+   • Annual Profit per Validator: $242815.20
+   • Annual ROI per Validator: 24280.8%
 
 [PROFITABILITY ASSESSMENT]
-   • Break-even Stake: 2107655 TON
+   • Break-even Stake: 2322392 TON
    • Break-even Validators: 2 validators minimum
-   • Profit Margin: 95.7% (Net/Revenue)
-   • Activation Period: 20 days setup (costs $16000.00)
-   • Activation Cost Recovery: .8 days of operation
+   • Profit Margin: 95.2% (Net/Revenue)
+   • Activation Period: 20 days setup (costs $18000.00)
+   • Activation Cost Recovery: .9 days of operation
    • Capital Efficiency: 100.0% of available stake deployed
    • Status: HIGHLY PROFITABLE
 
 [KEY RECOMMENDATIONS]
-   • Deploy 23 validators with 2083677 TON each (max effective)
-   • Deploy 1 validator with 2075429 TON (remainder)
-   • Total deployment: 24 validators using 50.000M TON
-   • Setup timeline: 20 days to activate (budget $16000.00)
-   • Monthly hardware budget: $24000 ($1000 per validator)
-   • Expected monthly profit: $537553.65000000 (after activation)
-   • Total stake earning 4.15333500% APY on 50.000M TON
-   • Validators will be 203.2% of network average size
+   • Deploy 26 validators with 1890420 TON each (max effective)
+   • Deploy 1 validator with 849080 TON (remainder)
+   • Total deployment: 27 validators using 50.000M TON
+   • Setup timeline: 20 days to activate (budget $18000.00)
+   • Monthly hardware budget: $27000 ($1000 per validator)
+   • Expected monthly profit: $546334.20000000 total ($20234.60 per validator)
+   • Each validator earns 4.30590500% APY with 2023.4%/month ROI
+   • Total stake earning 4.30590500% APY on 50.000M TON
+   • Validators will be 191.2% of network average size
+   • Individual validator payback: .9 days to recover activation costs
+
+════════════════════════════════════════════════════════════════════════════════
 ```
 
 ## Output Sections
